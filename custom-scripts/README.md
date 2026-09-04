@@ -49,8 +49,3 @@ Obtido de /sys/bus/usb/devices.
 As interfaces são obtidas de /sys/class/net.
 Os endereços IPv4 são identificados através de
 /proc/net/fib_trie e /proc/net/route.
-
-## Screenshots
-
-[adicionar screenshot do boot]
-[adicionar screenshot do curl /status]
