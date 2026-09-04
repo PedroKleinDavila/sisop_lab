@@ -1,0 +1,44 @@
+#!/bin/sh
+
+PIDFILE=/var/run/systeminfo.pid
+LOGFILE=/tmp/systeminfo.log
+
+case "$1" in
+    start)
+        printf "Starting SystemInfo... "
+
+        if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+            echo "already running"
+            exit 0
+        fi
+
+        /usr/bin/python3 /usr/bin/systeminfo.py >"$LOGFILE" 2>&1 &
+        echo $! > "$PIDFILE"
+
+        echo "OK"
+        ;;
+
+    stop)
+        printf "Stopping SystemInfo... "
+
+        if [ -f "$PIDFILE" ]; then
+            PID="$(cat "$PIDFILE")"
+            kill "$PID" 2>/dev/null
+            rm -f "$PIDFILE"
+        fi
+
+        echo "OK"
+        ;;
+
+    restart|reload)
+        "$0" stop
+        "$0" start
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0
