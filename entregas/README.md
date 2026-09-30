@@ -16,6 +16,9 @@ No QEMU, faça login como `root`. Antes dos testes de disco, confira
 `cat /proc/version`, `ls -l /dev/sda /dev/sdb` e
 `cat /sys/block/sdb/size`. O tamanho esperado de `/dev/sdb` é 2097152
 setores de 512 bytes. Se não coincidir, não rode os testes de disco.
+`/dev/sdc` é uma imagem ext2 pequena usada para devolver os logs do
+SSTF ao host. Após executar `run_sstf` no convidado e sair do QEMU,
+use `./scripts/lab-collect.sh` para extrair o log e gerar o relatório.
 Encerre o QEMU com `Ctrl-A X`.
 
 As entregas ficam em três diretórios: `tutorial-2.2/`, `tutorial-2.3/`

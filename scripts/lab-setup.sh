@@ -24,7 +24,7 @@ available_kib="$(df -Pk "$ROOT" | awk 'NR==2 {print $4}')"
 
 packages=(build-essential bc bison flex libssl-dev libelf-dev libncurses-dev
           rsync cpio unzip wget curl xz-utils qemu-system-x86 zip patch
-          python3 gawk file git perl)
+          python3 python3-reportlab e2fsprogs gawk file git perl)
 missing=()
 for package in "${packages[@]}"; do
     dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -qx 'install ok installed' ||
@@ -38,7 +38,9 @@ fi
 
 mkdir -p "$LAB/cache" "$LAB/src" "$ROOT/output-lab"
 if [[ ! -f "$ARCHIVE" ]]; then
-    curl --fail --location --retry 3 +        'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.13.9.tar.xz' +        --output "$ARCHIVE"
+    curl --fail --location --retry 3 \
+        'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.13.9.tar.xz' \
+        --output "$ARCHIVE"
 fi
 echo "$EXPECTED_SHA  $ARCHIVE" | sha256sum --check --status || {
     echo "Checksum incorreto para o kernel 4.13.9; remova o arquivo e tente novamente." >&2
