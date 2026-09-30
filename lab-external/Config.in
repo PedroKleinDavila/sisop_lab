@@ -1,0 +1,5 @@
+menu "SISOP TP2"
+source "$BR2_EXTERNAL_LAB_PATH/package/lab-syscalls/Config.in"
+source "$BR2_EXTERNAL_LAB_PATH/package/lab-xtea/Config.in"
+source "$BR2_EXTERNAL_LAB_PATH/package/lab-sstf/Config.in"
+endmenu

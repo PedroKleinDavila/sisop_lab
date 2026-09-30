@@ -1,4 +1,8 @@
 /output
+/output-lab/
+/.lab/
+/entregas/**/build/
+/entregas/**/__pycache__/
 /dl
 /.auto.deps
 /.config.cmd
@@ -13,3 +17,9 @@
 *.rej
 *~
 *.pyc
+*.ko
+*.mod.c
+*.mod
+*.cmd
+*.order
+*.symvers

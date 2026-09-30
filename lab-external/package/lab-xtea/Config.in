@@ -1,0 +1,3 @@
+config BR2_PACKAGE_LAB_XTEA
+	bool "TP2 XTEA character driver"
+	depends on BR2_LINUX_KERNEL

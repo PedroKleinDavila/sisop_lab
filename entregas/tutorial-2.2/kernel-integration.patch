@@ -1,0 +1,36 @@
+--- a/Makefile
++++ b/Makefile
+@@ -941,7 +941,7 @@
+ 
+ 
+ ifeq ($(KBUILD_EXTMOD),)
+-core-y		+= kernel/ certs/ mm/ fs/ ipc/ security/ crypto/ block/
++core-y		+= kernel/ certs/ mm/ fs/ ipc/ security/ crypto/ block/ syscall/
+ 
+ vmlinux-dirs	:= $(patsubst %/,%,$(filter %/, $(init-y) $(init-m) \
+ 		     $(core-y) $(core-m) $(drivers-y) $(drivers-m) \
+--- a/arch/x86/entry/syscalls/syscall_32.tbl
++++ b/arch/x86/entry/syscalls/syscall_32.tbl
+@@ -391,3 +391,6 @@
+ 382	i386	pkey_free		sys_pkey_free
+ 383	i386	statx			sys_statx
+ 384	i386	arch_prctl		sys_arch_prctl			compat_sys_arch_prctl
++385	i386	listProcessInfo		sys_listProcessInfo
++386	i386	listSleepingProcesses	sys_listSleepingProcesses
++387	i386	logUserMessage		sys_logUserMessage
+--- a/include/linux/syscalls.h
++++ b/include/linux/syscalls.h
+@@ -906,4 +906,8 @@
+ asmlinkage long sys_statx(int dfd, const char __user *path, unsigned flags,
+ 			  unsigned mask, struct statx __user *buffer);
+ 
+-#endif
++asmlinkage long sys_listProcessInfo(long pid, char __user *out, int size);
++asmlinkage long sys_listSleepingProcesses(pid_t __user *out, size_t capacity);
++asmlinkage long sys_logUserMessage(const char __user *message);
++
++#endif
+--- /dev/null
++++ b/syscall/Makefile
+@@ -0,0 +1 @@
++obj-y += process_info.o list_sleeping.o log_message.o

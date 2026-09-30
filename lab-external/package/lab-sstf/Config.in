@@ -1,0 +1,3 @@
+config BR2_PACKAGE_LAB_SSTF
+	bool "TP2 SSTF I/O scheduler"
+	depends on BR2_LINUX_KERNEL
