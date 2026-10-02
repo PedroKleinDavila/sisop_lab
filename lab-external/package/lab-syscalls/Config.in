@@ -1,0 +1,3 @@
+config BR2_PACKAGE_LAB_SYSCALLS
+	bool "TP2 syscall tests"
+	depends on BR2_LINUX_KERNEL
